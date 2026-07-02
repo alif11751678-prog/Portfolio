@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="th" data-theme="dark" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>อาลีฟ // Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Theme Configurations using CSS Variables */
+        [data-theme="light"] {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --text-main: #1f2937;
+            --text-muted: #4b5563;
+            --accent: #3b82f6;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+        }
+        [data-theme="dark"] {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+        }
+        [data-theme="cyberpunk"] {
+            --bg-primary: #050505;
+            --bg-secondary: #0f1c15;
+            --text-main: #00ff66;
+            --text-muted: #00aa44;
+            --accent: #00ff66;
+            --card-bg: #0d1117;
+            --border-color: #00ff66;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+        }
+
+        .theme-transition {
+            transition: all 0.4s ease;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        /* Typewriter Cursor Animation */
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--accent);
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Top Reading Progress Bar -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-[var(--accent)] z-50 transition-all duration-75" style="width: 0%;"></div>
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 backdrop-blur-md bg-[var(--bg-primary)]/80 border-b border-[var(--border-color)] theme-transition">
+        <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold tracking-wider text-[var(--accent)]">// Alif.DEV</a>
+            
+            <div class="flex items-center gap-6">
+                <!-- Live GitHub Link -->
+                <a href="https://github.com/[ชื่อแฮนเดิลของคุณ]" target="_blank" class="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors">
+                    <i class="fab fa-github text-lg"></i>
+                    <span class="hidden sm:inline">GitHub</span>
+                </a>
+
+                <!-- 3-State Theme Toggle -->
+                <button id="theme-toggle" class="relative w-24 h-9 rounded-full bg-[var(--bg-secondary)] border border-[var(--border-color)] p-1 flex items-center justify-between cursor-pointer text-xs select-none theme-transition" aria-label="Toggle Theme">
+                    <span class="z-10 flex-1 text-center opacity-60" id="lbl-light"><i class="fa-solid fa-sun"></i></span>
+                    <span class="z-10 flex-1 text-center opacity-60" id="lbl-dark"><i class="fa-solid fa-moon"></i></span>
+                    <span class="z-10 flex-1 text-center opacity-60" id="lbl-cyber"><i class="fa-solid fa-terminal"></i></span>
+                    <!-- Slider background pill -->
+                    <div id="theme-slider" class="absolute top-[3px] bottom-[3px] left-[3px] w-[28px] rounded-full bg-[var(--accent)] opacity-20 transition-all duration-300 ease-out"></div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section with Typewriter Effect -->
+    <section class="max-w-5xl mx-auto px-4 pt-20 pb-16 border-b border-[var(--border-color)] theme-transition">
+        <div class="max-w-3xl">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 min-h-[50px] md:min-h-[72px]">
+                <span id="typewriter"></span><span class="cursor">&nbsp;</span>
+            </h1>
+            <p class="text-lg md:text-xl text-[var(--text-muted)] theme-transition">
+                สวัสดีครับผมอาลีฟฆาเราะ กำลังศึกษาที่วิทยาลัยเทคนิคยะลา ผมเป็นคนที่ทำอะไรแล้วต้องทำให้สุดและเต็มที่ และชอบทำอะไรใหม่ๆ
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Layout -->
+    <main class="max-w-5xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Left Side: Projects (Hover-Raise Cards) -->
+        <div class="lg:col-span-2 space-y-8">
+            <h2 class="text-xl font-bold uppercase tracking-widest text-[var(--text-muted)] mb-6">// Featured Projects (ผลงานเด่น)</h2>
+            
+            <!-- นักศึกษาวิชาทหาร -->
+            <div class="group block p-6 rounded-xl bg-[var(--card-bg)] border border-[var(--border-color)] transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)] theme-transition">
+                <div class="flex items-center gap-3 text-xs text-[var(--text-muted)] mb-3">
+                    <span>Web Application</span>
+                    <span>•</span>
+                    <span class="text-[var(--accent)]">Next.js, Tailwind, Supabase</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 group-hover:text-[var(--accent)] transition-colors">นักศึกษาวิชาทหาร</h3>
+                <p class="text-[var(--text-muted)] mb-6 theme-transition">
+                    การได้เป็นนักศึกษาวิชาทหาร เป็นประสบการณ์ที่ช่วยพัฒนาเราในหลายด้าน ทั้งด้าน ระเบียบวินัย ความอดทน ความรับผิดชอบ และความมีน้ำใจต่อผู้อื่น การฝึกวิชาทหารไม่เพียงแต่สอนให้เรามีร่างกายแข็งแรง แต่ยังช่วยปลูกฝังจิตสำนึกเรื่องความรักชาติ ความเสียสละ และการทำงานเป็นทีม
+                </p>
+                
+                <!-- Code Block Demo inside Project -->
+                <div class="relative rounded-lg overflow-hidden bg-black/40 border border-[var(--border-color)] mb-4 font-mono text-xs">
+                    <img src="https://scontent-bkk1-2.xx.fbcdn.net/v/t39.30808-6/481568538_1950462818817005_7760095174099873676_n.jpg?stp=dst-jpg_tt6&amp;cstp=mx1080x956&amp;ctp=s1080x956&amp;_nc_cat=100&amp;ccb=1-7&amp;_nc_sid=127cfc&amp;_nc_eui2=AeF_oPYuj6UdkzcdH7TPBrko_cpJa7pJhWP9yklrukmFY_qB0o6KV9v8xs5jDUZvehYWdjBzEOh5U60n0wjMifKp&amp;_nc_ohc=3r8RR62ELyUQ7kNvwG6MxNV&amp;_nc_oc=AdrQsjNSsZ_MgMhKR3RUG5Xnnau-OfplKke-2Z97Lv8OyUdA3j5jYIdBxktuhVxmJ6A&amp;_nc_zt=23&amp;_nc_ht=scontent-bkk1-2.xx&amp;_nc_gid=ohn0Vl3Gby-mmSYaE6I4Sw&amp;_nc_ss=7b2a8&amp;oh=00_AQCRhe5m-qYFS8Me55MTD3Qni7dtu9K2hgk66pUy6Z3qbQ&amp;oe=6A4C1B0F" 
+                 alt="Project Screenshot" >
+                    
+                </div>
+            </div>
+
+            <!-- Project Card 2 -->
+            <div class="group block p-6 rounded-xl bg-[var(--card-bg)] border border-[var(--border-color)] transition-all duration-300 transform hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(0,0,0,0.15)] theme-transition">
+                <div class="flex items-center gap-3 text-xs text-[var(--text-muted)] mb-3">
+                    <span>Web Application</span>
+                    <span>•</span>
+                    <span class="text-[var(--accent)]">Next.js, Tailwind, Supabase</span>
+                </div>
+                <h3 class="text-2xl font-bold mb-3 group-hover:text-[var(--accent)] transition-colors">ได้ไปศึกษาและปฏิบัติที่โรงเรียนชาวนา</h3>
+                <p class="text-[var(--text-muted)] mb-6 theme-transition">
+                    ได้ไปเรียนรู้ที่โรงเรียนชาวนาบ้านละหา อ.​แว้ง​ จ.นราธิวาส เมื่อวันที่ 13 มกราคม พ.ศ. 2568
+                </p>
+                
+                <!-- Code Block Demo inside Project -->
+                <div class="relative rounded-lg overflow-hidden bg-black/40 border border-[var(--border-color)] mb-4 font-mono text-xs">
+                    <img src="https://cdn.phototourl.com/free/2026-07-02-36111da8-8536-4497-a896-9e899934bac5.png" >
+                    
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side: Sidebar Profile Details (เพิ่มช่องข้อมูลส่วนตัวตรงนี้) -->
+        <aside class="space-y-6 lg:h-fit lg:sticky lg:top-24">
+            
+            <!-- 🆕 กล่องข้อมูลส่วนตัวหลัก (Personal Profile) -->
+            <div class="p-6 rounded-xl bg-[var(--card-bg)] border border-[var(--border-color)] theme-transition">
+                <h3 class="font-bold text-lg mb-4">// Personal Information</h3>
+                
+                <!-- ข้อมูลการติดต่อแบบ List -->
+                <div class="space-y-3 text-sm theme-transition">
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-user mt-1 text-[var(--accent)] w-4 text-center"></i>
+                        <div>
+                            <span class="block text-xs text-[var(--text-muted)]">ชื่อ-นามสกุล</span>
+                            <span class="font-medium text-[var(--text-main)]">นายอาลีฟ ฆาเราะ</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-envelope mt-1 text-[var(--accent)] w-4 text-center"></i>
+                        <div>
+                            <span class="block text-xs text-[var(--text-muted)]">อีเมลติดต่อ</span>
+                            <a href="mailto:[อีเมลของคุณ]@example.com" class="hover:text-[var(--accent)] underline transition-colors">alif11751678@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-phone mt-1 text-[var(--accent)] w-4 text-center"></i>
+                        <div>
+                            <span class="block text-xs text-[var(--text-muted)]">เบอร์โทรศัพท์</span>
+                            <span class="text-[var(--text-main)]">099-360-5425</span>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-location-dot mt-1 text-[var(--accent)] w-4 text-center"></i>
+                        <div>
+                            <span class="block text-xs text-[var(--text-muted)]">ที่อยู่ปัจจุบัน</span>
+                            <span class="text-[var(--text-main)]">225/1 หมู่ที่5 ต.สุไหงปาดี อ.สุไหงปาดี จ.นราธิวาส 96140, ประเทศไทย</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ปุ่มลิงก์ไปยังโซเชียลมีเดีย/Resume -->
+                <div class="grid grid-cols-2 gap-2 mt-6">
+                    <a href="https://www.instagram.com/_.alxf._?igsh=M2VqOWFrYXVoYjk= _.Alxf._" target="_blank" class="flex items-center justify-center gap-2 p-2 text-xs font-medium rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--accent)] transition-colors">
+                        <i class="fab fa-instagram text-pink-500"></i> Instagram
+                    </a>
+                    <a href="https://www.facebook.com/share/19KBz5pYUo/" target="_blank" class="flex items-center justify-center gap-2 p-2 text-xs font-medium rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] hover:border-[var(--accent)] transition-colors">
+    <i class="fab fa-facebook text-blue-600 text-sm"></i> Facebook
+</a>
+                </div>
+            </div>
+
+            <!-- 🆕 กล่องประวัติการศึกษา/สถานะการทำงาน (Education & Status) -->
+            <div class="p-6 rounded-xl bg-[var(--card-bg)] border border-[var(--border-color)] theme-transition">
+                <h3 class="font-bold text-lg mb-3">// ประวัติการศึกษาและสถานะปัจจุบัน</h3>
+                <div class="space-y-4 text-sm">
+                    <div class="space-y-4 text-sm">
+    <div>
+        <strong class="block text-base font-bold text-[var(--text-main)] uppercase tracking-wider">// การศึกษา</strong>
+        <div class="mt-1.5 font-medium text-[var(--text-muted)]">มัธยมศึกษา ศิลป์ทั่วไป</div>
+        <div class="text-xs text-[var(--text-muted)]">โรงเรียนแสงธรรมวิทยา (ปี 2562 - 2569)</div>
+    </div>
+
+    <div class="pt-3 border-t border-[var(--border-color)] theme-transition">
+        <strong class="block text-xs font-bold text-[var(--text-main)] uppercase tracking-wider">// สถานะปัจจุบัน</strong>
+        
+        <div class="flex items-center gap-2 mt-1.5">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            <span class="text-xs font-mono text-green-500 font-bold uppercase">กำลังศึกษา</span>
+        </div>
+
+        <div class="mt-2 pl-4 border-l-2 border-[var(--accent)]">
+            <span class="block text-xs text-[var(--text-main)]">สถาบันปัจจุบัน:</span>
+            <span class="text-xs font-medium text-[var(--text-muted)]">วิทยาลัยเทคนิคยะลา แผนกเทคโนโลยีคอมพิวเตอร์</span>
+        </div>
+    </div>
+</div>
+                </div>
+            </div>
+            
+            <!-- Tech Stack Card -->
+            <div class="p-6 rounded-xl bg-[var(--card-bg)] border border-[var(--border-color)] theme-transition">
+                <h3 class="font-bold text-lg mb-3">// ความสามารถพิเศษ</h3>
+                <div class="flex flex-wrap gap-2 text-xs">
+                    <span class="px-2.5 py-1 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] font-mono">ใช้โปรแกรมพื้นฐานได้</span>
+                    <span class="px-2.5 py-1 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] font-mono">แก้ปัญหาคอมพิวเตอร์เบื้องต้นได้</span>
+                    <span class="px-2.5 py-1 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] font-mono">มีความสามารถในการวางแผนและจัดระบบข้อมูลอย่างเป็นระเบียบ</span>
+                    <span class="px-2.5 py-1 rounded bg-[var(--bg-secondary)] border border-[var(--border-color)] font-mono">มีทักษะการคิดวิเคราะห์และตัดสินใจอย่างมีเหตุผล</span>
+                    
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="max-w-5xl mx-auto px-4 py-8 text-center text-xs text-[var(--text-muted)] border-t border-[var(--border-color)] mt-20 theme-transition">
+        &copy; 2026 Alif Kharoh. เป็น Portfolio ของอาลีฟ
+    </footer>
+
+    <!-- JavaScript Execution Layer -->
+    <script>
+        // --- 1. TYPEWRITER HERO IMPLEMENTATION ---
+        const typewriterElement = document.getElementById('typewriter');
+        const phrases = ["สวัสดีครับ ผมชื่อ อาลีฟ", "I enjoy learning new things", "ผมชอบเรียนรู้อะไรใหม่ๆ"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let delayTime = 150;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                delayTime = 50;
+            } else {
+                typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                delayTime = 120;
+            }
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                isDeleting = true;
+                delayTime = 2000;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                delayTime = 500;
+            }
+
+            setTimeout(type, delayTime);
+        }
+        document.addEventListener("DOMContentLoaded", () => setTimeout(type, 500));
+
+
+        // --- 2. 3-STATE THEME TOGGLE ENGINE ---
+        const themes = ['light', 'dark', 'cyberpunk'];
+        let currentThemeIndex = 1;
+        
+        const htmlElement = document.documentElement;
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeSlider = document.getElementById('theme-slider');
+        
+        const sliderPositions = {
+            'light': 'left: 3px; width: 28px;',
+            'dark': 'left: 33px; width: 28px;',
+            'cyberpunk': 'left: 63px; width: 28px;'
+        };
+
+        function applyTheme(themeName) {
+            htmlElement.setAttribute('data-theme', themeName);
+            themeSlider.style.cssText = sliderPositions[themeName];
+            
+            document.getElementById('lbl-light').style.opacity = themeName === 'light' ? '1' : '0.4';
+            document.getElementById('lbl-dark').style.opacity = themeName === 'dark' ? '1' : '0.4';
+            document.getElementById('lbl-cyber').style.opacity = themeName === 'cyberpunk' ? '1' : '0.4';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            applyTheme(themes[currentThemeIndex]);
+        });
+        applyTheme(themes[currentThemeIndex]);
+
+
+        // --- 3. COPY-FLASH CODE BUTTON ENGINE ---
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const textToCopy = btn.getAttribute('data-code');
+                try {
+                    await navigator.clipboard.writeText(textToCopy);
+                    
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = `<i class="fa-solid fa-check text-green-400"></i> <span class="text-green-400 font-bold">Copied!</span>`;
+                    btn.closest('.relative').classList.add('ring-2', 'ring-emerald-500/50');
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.closest('.relative').classList.remove('ring-2', 'ring-emerald-500/50');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy text', err);
+                }
+            });
+        });
+
+
+        // --- 4. TOP READING-PROGRESS BAR ---
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+    </script>
+</body>
+</html>
